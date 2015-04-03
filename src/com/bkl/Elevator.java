@@ -1,5 +1,6 @@
 package com.bkl;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,8 +25,17 @@ public class Elevator {
 
     public void makeTrip(int requestedFloor){
         //TODO: need to plan to handle going to multiple destinations on trip
-
+        tripCounter++;
         destinations.add(requestedFloor);
+        Collections.sort(destinations);
+
+        //calculate direction, start hitting destinations in the list and removing them from destination list
+
+        while(destinations.size() > 0) {
+            //figure out NEXT destination
+            //goDirectToFloor(NEXT_DEST);
+        }
+
     }
 
     private void goDirectToFloor(int floor){
@@ -61,8 +71,24 @@ public class Elevator {
         }
     }
 
-    public void getDistanceFromFloor(int floor){
+    public int getDistanceFromFloor(int floor){
         //calculate distance taking into account the existing destinations
+        return 0;
     }
 
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public Boolean isCurrentDirection() {
+        return currentDirection;
+    }
+
+    public List<Integer> getDestinations() {
+        return destinations;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }
