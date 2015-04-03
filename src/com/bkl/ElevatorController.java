@@ -21,19 +21,25 @@ public class ElevatorController {
         int closestDistance = 0;
 
         for (Map.Entry<Integer, Elevator> e : elevatorMap.entrySet()) {
-            if(e.getValue().getCurrentFloor() == floorRequesting){
-                //Already have an elevator on the floor dispatch
-                return e.getValue();
-            }else{
-                int distance = e.getValue().getDistanceFromFloor(floorRequesting);
-                if(distance < closestDistance || closestDistance == 0){
-                    closestElevatorId = e.getKey();
-                    closestDistance = distance;
+            if(e.getValue().isActive()) {
+                if (e.getValue().getCurrentFloor() == floorRequesting) {
+                    //Already have an elevator on the floor dispatch
+                    return e.getValue();
+                } else {
+                    int distance = e.getValue().getDistanceFromFloor(floorRequesting);
+                    if (distance < closestDistance || closestDistance == 0) {
+                        closestElevatorId = e.getKey();
+                        closestDistance = distance;
+                    }
                 }
             }
-            return elevatorMap.get(closestElevatorId);
         }
-
+        if(closestElevatorId > 0) {
+            return elevatorMap.get(closestElevatorId);
+        }else{
+            //ERROR -> ALL ELEVATORS ARE UNAVAILABLE
+            return null;
+        }
     }
 
 

@@ -17,6 +17,8 @@ public class Elevator {
     private int elevatorId;
     private ElevatorController myController;
 
+    private final int TRIP_MAINTENANCE = 100;
+
     public Elevator(ElevatorController parent, int elevatorId, int numOfFloors){
         this.myController = parent;
         this.elevatorId = elevatorId;
@@ -68,7 +70,18 @@ public class Elevator {
 
             //Open doors at destination
             myController.openedDoors(elevatorId, currentFloor);
+
+            if(tripCounter >= TRIP_MAINTENANCE){
+                //Time for maintenance
+                myController.closedDoors(elevatorId, currentFloor);
+                active = false;
+            }
         }
+    }
+
+    public void reactivateElevatorPostMaintenance(){
+        this.active = true;
+        tripCounter = 0;
     }
 
     public int getDistanceFromFloor(int floor){
