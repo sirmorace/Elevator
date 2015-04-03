@@ -15,7 +15,7 @@ public class ElevatorController {
     }
 
     public void requestElevator(int floorRequesting){
-        //determine which elevator to give the request to
+        //determine which elevator to give the request to: (priority) Elevator at the floor, nearest empty or occupied passing
 
 
     }

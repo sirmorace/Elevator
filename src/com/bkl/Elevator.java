@@ -23,30 +23,41 @@ public class Elevator {
     }
 
     public void makeTrip(int requestedFloor){
-        //need to plan to handle going to multiple destinations on trip
+        //TODO: need to plan to handle going to multiple destinations on trip
 
         destinations.add(requestedFloor);
     }
 
     private void goDirectToFloor(int floor){
-        if(floor > currentFloor){
-            //Positive for UP
-            currentDirection = true;
-            for(int i=currentFloor;i<=floor;i++){
-                floorsPassedCounter++;
-                currentFloor++;
-            }
-        }else if(floor < currentFloor){
-            //Negative for DOWN
-            currentDirection = false;
-            for(int i=currentFloor;i>=floor;i--){
-                floorsPassedCounter++;
-                currentFloor--;
+        //Safe guard against going to invalid floor
+        if(floor > 0 && floor <= numberOfFloors) {
+            //close doors before moving
+            myController.closedDoors(elevatorId, currentFloor);
+
+            if (floor > currentFloor) {
+                //Positive for UP
+                currentDirection = true;
+                for (int i = currentFloor; i <= floor; i++) {
+                    floorsPassedCounter++;
+                    currentFloor++;
+                    myController.reportMovement(elevatorId, currentFloor);
+                }
+            } else if (floor < currentFloor) {
+                //Negative for DOWN
+                currentDirection = false;
+                for (int i = currentFloor; i >= floor; i--) {
+                    floorsPassedCounter++;
+                    currentFloor--;
+                    myController.reportMovement(elevatorId, currentFloor);
+                }
+
+            } else {
+                //Null for stopped
+                currentDirection = null;
             }
 
-        }else{
-            //Null for stopped
-            currentDirection = null;
+            //Open doors at destination
+            myController.openedDoors(elevatorId, currentFloor);
         }
     }
 
