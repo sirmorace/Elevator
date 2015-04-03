@@ -19,4 +19,15 @@ public class Elevator {
         this.elevatorId = elevatorId;
         this.numberOfFloors = numOfFloors;
     }
+
+    public void makeTrip(int requestedFloor){
+        //need to plan to handle going to multiple destinations on trip
+
+        destinations.add(requestedFloor);
+    }
+
+    public void getDistanceFromFloor(int floor){
+        //calculate distance taking into account the existing destinations
+
+    }
 }
