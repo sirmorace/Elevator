@@ -12,8 +12,11 @@ public class Elevator {
     private int currentFloor = 1;
     private Boolean currentDirection = null;
     private List<Integer> destinations;
+    private boolean active = true;
+    private int elevatorId;
 
-    public Elevator(int numOfFloors){
+    public Elevator(int elevatorId, int numOfFloors){
+        this.elevatorId = elevatorId;
         this.numberOfFloors = numOfFloors;
     }
 }
