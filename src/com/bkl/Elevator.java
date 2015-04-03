@@ -14,8 +14,10 @@ public class Elevator {
     private List<Integer> destinations;
     private boolean active = true;
     private int elevatorId;
+    private ElevatorController myController;
 
-    public Elevator(int elevatorId, int numOfFloors){
+    public Elevator(ElevatorController parent, int elevatorId, int numOfFloors){
+        this.myController = parent;
         this.elevatorId = elevatorId;
         this.numberOfFloors = numOfFloors;
     }
@@ -26,8 +28,30 @@ public class Elevator {
         destinations.add(requestedFloor);
     }
 
+    private void goDirectToFloor(int floor){
+        if(floor > currentFloor){
+            //Positive for UP
+            currentDirection = true;
+            for(int i=currentFloor;i<=floor;i++){
+                floorsPassedCounter++;
+                currentFloor++;
+            }
+        }else if(floor < currentFloor){
+            //Negative for DOWN
+            currentDirection = false;
+            for(int i=currentFloor;i>=floor;i--){
+                floorsPassedCounter++;
+                currentFloor--;
+            }
+
+        }else{
+            //Null for stopped
+            currentDirection = null;
+        }
+    }
+
     public void getDistanceFromFloor(int floor){
         //calculate distance taking into account the existing destinations
-
     }
+
 }

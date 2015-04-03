@@ -10,7 +10,7 @@ public class ElevatorController {
 
     public ElevatorController(int numberOfElevators, int numberOfFloors){
         for(int i=1;i<=numberOfElevators;i++){
-            elevatorMap.put(i, new Elevator(i, numberOfFloors));
+            elevatorMap.put(i, new Elevator(this, i, numberOfFloors));
         }
     }
 
@@ -20,5 +20,19 @@ public class ElevatorController {
 
     }
 
+
+    //Reporting actions from elevators
+    public void reportMovement(int elevatorId, int floor){
+
+    }
+    public void openedDoors(int elevatorId, int floor){
+
+    }
+    public void closedDoors(int elevatorId, int floor){
+
+    }
+    public void requiresMaintenance(int elevatorId){
+
+    }
 
 }
